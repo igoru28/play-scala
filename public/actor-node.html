@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row form-group">
+            <div class="col-lg-4">
+                <strong>Actor &nbsp;({{node.path}})</strong>
+                <button class="btn btn-success"
+                        ng-click="data.add(node.path)">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button class="btn btn-warning" ng-click="data.quit(node.path)" ng-hide="root">
+                    <span class="glyphicon glyphicon-minus"></span>
+                </button>
+            </div>
+            <div class="col-lg-4">
+                <label>
+                    message:&nbsp;
+                    <input type="text" ng-model="data.messages[node.path]"/>
+                    <input type="button" class="btn btn-success" value="send" ng-click="data.send(node.path)"/>
+                    <input type="button" class="btn btn-danger" value="throw exception" ng-click="data.throwException(node.path)"/>
+                </label>
+            </div>
+            <div class="col-lg-4">
+                <div class="alert-warning text-center" role="alert" ng-show="showAlert">
+                    <p>{{ responseMsg }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body container-fluid" ng-hide="!node.children || node.children.length == 0">
+        <actor-node root="false" node="child" ng-repeat="child in node.children"/>
+    </div>
+</div>
