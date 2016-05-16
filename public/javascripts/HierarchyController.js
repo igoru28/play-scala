@@ -9,11 +9,13 @@ app.factory('data', ['$http', function ($http) {
                     ret.rootNode = response.data;
                     $http({method: 'GET', url: '/messages'})
                         .then(function(response) {
+                            ret.commonResponses = []
                             for (var i in response.data) {
                                 var path = response.data[i].path;
                                 var msg = response.data[i].message;
                                 if (msg && msg.length > 0) {
                                     ret.responses[path] = msg
+                                    ret.commonResponses.push({path: path, message: msg})
                                 }
                             }
                             //angular.forEach(response.data, function(path, message) {
@@ -52,7 +54,7 @@ app.factory('data', ['$http', function ($http) {
     };
     ret.refresh();
     return ret;
-}]).controller("AkkaDemoController", ['$scope', '$http', "$interval", 'data',
+}]).controller("HierarchyController", ['$scope', '$http', "$interval", 'data',
     function ($scope, $http, $interval, data) {
         $interval(data.refresh, 10000)
 

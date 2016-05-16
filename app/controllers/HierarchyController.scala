@@ -14,7 +14,7 @@ import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
 @Singleton
-class Application @Inject()(val actorSystem: ActorSystem) extends Controller {
+class HierarchyController @Inject()(val actorSystem: ActorSystem) extends Controller {
   val rootActor = actorSystem.actorOf(Props[NodeActor], "root")
   val statusCollector = actorSystem.actorOf(Props[StatusCollector], "collector")
   implicit val timeout = Timeout(10 seconds)
@@ -26,7 +26,7 @@ class Application @Inject()(val actorSystem: ActorSystem) extends Controller {
   }
 
   def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+    Ok(views.html.tree())
   }
 
 

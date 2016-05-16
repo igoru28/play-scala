@@ -1,41 +1,45 @@
-@(title: String)
+@()
 
 <!DOCTYPE html>
 
 <html lang="en" ng-app="app">
-    <head>
-        <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-
-        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))"/>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-route.min.js"))"></script>
-
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/DeployController.js")"></script>
-    </head>
-    <body>
-        <div class="page-header navbar navbar-default">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/">Akka demo</a>
-                    <a class="navbar-brand" href="/deploy">Deploy</a>
+    @header()
+<body>
+@navbar()
+<div class="container-fluid" ng-controller="ConfigController">
+    <div class="panel panel-default">
+        <div class="panel-heading">Configuration
+            <label>env:<select ng-model="env">
+                <option ng-repeat="env in environments"></option>
+            </select></label>
+        </div>
+        <div class="panel-body container">
+            <div class="row form-group" ng-repeat="parameter in parameters">
+                <div class="col-lg-4">
+                    <label>{{parameter.name}}<input class="form-control" type="text" ng-model="parameter.value"/></label>
+                </div>
+                <div class="col-lg-3">
+                    <button class="btn btn-default" ng-show="parameter.value != parameter.initValue">
+                        <span class="glyphicon glyphicon-check"></span>
+                        Apply
+                    </button>
                 </div>
             </div>
         </div>
-        <div class="container-fluid" ng-controller="DeployController" >
-            <div class="panel">
-                <div class="panel-heading">
-                    {{applicationName}}
-                </div>
-                <div class="panel-body container">
-                    <div class="row">
-                        <div class="col-md-2">
-                        </div>
-                    </div>
+    </div>
+</div>
+<div class="container-fluid" ng-controller="DeployController" >
+    <div class="panel">
+        <div class="panel-heading">
+            {{applicationName}}
+        </div>
+        <div class="panel-body container">
+            <div class="row">
+                <div class="col-md-2">
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>

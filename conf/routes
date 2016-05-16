@@ -3,20 +3,25 @@
 # ~~~~
 
 # Home page
-GET         /                      @controllers.Application.index
+GET         /                           @controllers.HierarchyController.index
+GET         /tree                       @controllers.HierarchyController.index
+GET         /deploy                     @controllers.DeployController.deploy
 
-GET         /actors                @controllers.Application.actors
-POST        /addChild              @controllers.Application.addChild
-POST        /quit                  @controllers.Application.quit
+GET         /config/environments        @controllers.ConfigController.environments
+GET         /config/:env                @controllers.ConfigController.params(env)
 
-GET         /messages              @controllers.Application.messages
-POST        /ping                  @controllers.Application.ping
-POST        /throwException        @controllers.Application.throwException
+GET         /actors                     @controllers.HierarchyController.actors
+POST        /addChild                   @controllers.HierarchyController.addChild
+POST        /quit                       @controllers.HierarchyController.quit
+
+GET         /messages                   @controllers.HierarchyController.messages
+POST        /ping                       @controllers.HierarchyController.ping
+POST        /throwException             @controllers.HierarchyController.throwException
 
 # Map static resources from the /public folder to the /assets URL path
 #GET         /assets/*file         play.api.controllers.Assets.versioned(path="/public", file: Asset)
 
-GET         /webjars/*file         controllers.WebJarAssets.at(file)
+GET         /webjars/*file              controllers.WebJarAssets.at(file)
 #GET        /assets/*file         controllers.Assets.versioned(path="/public", file: Asset)
-GET         /assets/*file          controllers.Assets.at(path="/public", file)
+GET         /assets/*file               controllers.Assets.at(path="/public", file)
 

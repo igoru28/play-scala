@@ -26,7 +26,7 @@ class NodeActor extends Actor with Logging {
 
 
   override def supervisorStrategy: SupervisorStrategy =
-    akka.actor.OneForOneStrategy(maxNrOfRetries = 1, withinTimeRange = 20 seconds, loggingEnabled = true) {
+    akka.actor.OneForOneStrategy(maxNrOfRetries = 2, withinTimeRange = 20 seconds, loggingEnabled = true) {
       case e: Exception =>
         self ! Ping(s"exception in child ${e.toString}")
         Restart
@@ -47,14 +47,14 @@ class NodeActor extends Actor with Logging {
     context.parent ! Ping(s"stopped child ${self.path.toString}")
   }
 
-  def hierarchy(path: String) = {
+  def hierarchy = {
     Node(self.path.toString,
     context.children.map{child =>
       Await.result(pattern.ask(child, GetChildren), Duration.Inf).asInstanceOf[Node]
     }.toSeq)
   }
   override def receive: Receive = {
-    case GetChildren => sender() ! hierarchy(self.path.toString)
+    case GetChildren => sender() ! hierarchy
     case AddChild =>
       val childRef = context.actorOf(Props[NodeActor])
       childRef ! Ping("created")
@@ -62,7 +62,6 @@ class NodeActor extends Actor with Logging {
     case Ping(message) =>
       sender() ! Pong(message)
       collectorSelection ! Pong(message)
-//    case pong: Pong => collectorSelection ! pong
     case Quit =>
       context.parent ! Ping(s"stopping child ${self.path.toString}")
       context.stop(self)

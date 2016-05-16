@@ -1,0 +1,28 @@
+@()
+
+<!DOCTYPE html>
+
+<html lang="en" ng-app="app">
+    @header()
+    <body>
+        @navbar()
+        <div class="container-fluid" ng-controller="HierarchyController" >
+            <div class="row form-group well">
+                <div class="col-lg-offset-1 col-lg-3">
+                    <label>Actor path:<input type="text" ng-model="path"/></label>
+                </div>
+                <div class="col-lg-4">
+                    <label>message:<input type="text" ng-model="message"/></label>
+                    <input type="button" class="btn btn-success" value="send" ng-click="data.sendTo(path, message)"/>
+                    <input type="button" class="btn btn-danger" value="throw exception" ng-click="data.throwExceptionTo(path, message)"/>
+                </div>
+                <div class="col-lg-4">
+                    <div class="text-center">
+                        <p ng-repeat="response in data.commonResponses">{{ response.path }}:&nbsp;{{ response.message }}</p>
+                    </div>
+                </div>
+            </div>
+            <actor-node root="true" node="data.rootNode" ng-hide="!data.rootNode" />
+        </div>
+    </body>
+</html>
