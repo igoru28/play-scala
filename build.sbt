@@ -9,16 +9,19 @@ scalaVersion := "2.11.7"
 ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
 
 libraryDependencies ++= Seq(
-  jdbc,
   cache,
   ws,
+  evolutions,
   specs2 % Test,
   "org.slf4j" % "slf4j-nop" % "1.6.4",
   "org.webjars" %% "webjars-play" % "2.4.0-1",
   "org.webjars" % "angularjs" % "1.5.5",
   "org.webjars" % "bootstrap" % "3.3.6",
   "com.typesafe.akka" %% "akka-testkit" % "2.4.4" % Test,
-  "home" %% "configurationutil" % "1.0"
+  "home" %% "configurationutil" % "1.0.1",
+  "com.typesafe.play" %% "play-slick" % "2.0.2",
+  "com.typesafe.play" %% "play-slick-evolutions" % "2.0.2",
+  "com.h2database" % "h2" % "1.4.191"
 )
 
 resolvers := Seq[Resolver](

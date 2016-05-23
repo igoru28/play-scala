@@ -28,6 +28,10 @@ case class Configure(val config: Map[String, String]) extends Command
 // !!! not valid for distributed systems
 case class Deploy(val sources: Map[String, Iterator[Int]], config: Option[Map[String, String]] = None) extends Command
 
+case object DeployStart extends Command
+case class DeployPart(val fileName: String, part: Array[Int]) extends Command
+case object DeployFinish extends Command
+
 object Start extends Command
 
 object Stop extends Command

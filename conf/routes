@@ -9,6 +9,7 @@ GET         /deploy                     @controllers.DeployController.deploy
 
 GET         /config/environments        @controllers.ConfigController.environments
 GET         /config/:env                @controllers.ConfigController.params(env)
+POST        /config/store               @controllers.ConfigController.store
 
 GET         /actors                     @controllers.HierarchyController.actors
 POST        /addChild                   @controllers.HierarchyController.addChild

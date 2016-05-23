@@ -9,7 +9,12 @@ import play.api.mvc.{Action, Controller}
  */
 @Singleton
 class DeployController extends Controller {
+  private val applications = Map
   def deploy = Action {
     Ok(views.html.deploy())
+  }
+
+  def listApplications = Action {
+
   }
 }
