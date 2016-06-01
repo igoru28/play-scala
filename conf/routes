@@ -7,6 +7,8 @@ GET         /                           @controllers.HierarchyController.index
 GET         /tree                       @controllers.HierarchyController.index
 GET         /deploy                     @controllers.DeployController.deploy
 
+GET         /apps                       @controllers.DeployController.listApplications
+
 GET         /config/environments        @controllers.ConfigController.environments
 GET         /config/:env                @controllers.ConfigController.params(env)
 POST        /config/store               @controllers.ConfigController.store

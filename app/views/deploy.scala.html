@@ -6,11 +6,24 @@
     @header()
 <body>
 @navbar()
+<div class="container-fluid" ng-controller="DeployController" >
+    <div class="panel panel-default" ng-repeat="application in applications">
+        <div class="panel-heading">
+            {{application}}
+        </div>
+        <div class="panel-body container">
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-fluid" ng-controller="ConfigController">
     <div class="panel panel-default">
         <div class="panel-heading">Configuration
             <label>env:&nbsp;<select ng-model="currentEnv" ng-change="loadProperties()">
-                <option ng-repeat="env in environments| orderBy env" value="{{env}}">{{env}}</option>
+                <option ng-repeat="env in environments | orderBy" value="{{env}}">{{env}}</option>
             </select></label>
         </div>
         <div class="panel-body container">
@@ -27,19 +40,6 @@
                         <span class="glyphicon glyphicon-check"></span>
                         Apply
                     </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container-fluid" ng-controller="DeployController" >
-    <div class="panel">
-        <div class="panel-heading">
-            {{applicationName}}
-        </div>
-        <div class="panel-body container">
-            <div class="row">
-                <div class="col-md-2">
                 </div>
             </div>
         </div>

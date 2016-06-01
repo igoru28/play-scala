@@ -1,4 +1,4 @@
-var app = angular.module("app", []);
+var app = angular.module("app");
 
 app.controller("ConfigController",["$scope", "$http", function($scope, $http){
     $scope.loadProperties = function () {
